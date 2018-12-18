@@ -1,9 +1,10 @@
 # DevConnector
 
-Add mongoDB connection URI to config/keys.js
+Add your keys to config/keys.js
 
 ```
 module.exports = {
-  mongoURI: 'YOUR CONNECTION STRING'
+  mongoURI: 'YOUR CONNECTION STRING',
+  secretOrKey: 'YOUR SECRET OR KEY'
 };
 ```
