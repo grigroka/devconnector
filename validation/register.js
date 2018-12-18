@@ -1,8 +1,9 @@
 'use strict';
 
 const Validator = require('validator');
+const isEmpty = require('./is-empty');
 
-module.exports = function validateRegisterInput(data) {
+const validateRegisterInput = data => {
   let errors = {};
 
   if (!Validator.isLength(data.name, { min: 2, max: 30 })) {
@@ -11,6 +12,8 @@ module.exports = function validateRegisterInput(data) {
 
   return {
     errors,
-    isValid: errors
+    isValid: isEmpty(errors)
   };
 };
+
+module.exports = validateRegisterInput;
