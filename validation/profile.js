@@ -22,7 +22,7 @@ const validateProfileInput = data => {
   }
 
   if (Validator.isEmpty(data.skills)) {
-    errors.skills = 'SKills field handle is required';
+    errors.skills = 'Skills field handle is required';
   }
 
   if (!isEmpty(data.website)) {
