@@ -223,4 +223,34 @@ router.post(
   }
 );
 
+// @route   DELETE api/profile/experience/:exp_id
+// @desc    Delete experience from profile
+// @access  Private
+router.delete(
+  '/experience/:exp_id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const errors = {};
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        // Get remove index
+        const removeIndex = profile.experience
+          .map(item => item.id)
+          .indexOf(req.params.exp_id);
+
+        // Check if the experience is exist
+        if (removeIndex === -1) {
+          errors.noexptodelete = 'There is no experience to delete';
+          res.status(404).json(errors);
+        } else {
+          // Remove the experience
+          profile.experience.splice(removeIndex, 1);
+          // Save profile
+          profile.save().then(profile => res.json(profile));
+        }
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+
 module.exports = router;
