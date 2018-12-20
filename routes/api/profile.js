@@ -253,4 +253,34 @@ router.delete(
   }
 );
 
+// @route   DELETE api/profile/education/:edu_id
+// @desc    Delete education from profile
+// @access  Private
+router.delete(
+  '/education/:edu_id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const errors = {};
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        // Get remove index
+        const removeIndex = profile.education
+          .map(item => item.id)
+          .indexOf(req.params.edu_id);
+
+        // Check if the education is exist
+        if (removeIndex === -1) {
+          errors.noexptodelete = 'There is no education to delete';
+          res.status(404).json(errors);
+        } else {
+          // Remove the education
+          profile.education.splice(removeIndex, 1);
+          // Save profile
+          profile.save().then(profile => res.json(profile));
+        }
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+
 module.exports = router;
