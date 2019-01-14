@@ -15,11 +15,21 @@ export class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onSubmit = e => {
     e.preventDefault();
     const { email, password } = this.state;
-    const user = { email, password };
-    console.log(user);
+    const userData = { email, password };
+
+    this.props.loginUser(userData);
   };
 
   render() {
@@ -87,6 +97,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   { loginUser }
 )(Login);
