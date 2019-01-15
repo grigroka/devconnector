@@ -18,16 +18,12 @@ export class Navbar extends Component {
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <button
-            onClick={this.onLogoutClick}
-            className="nav-link"
-            style={{
-              background: 'none',
-              border: 'none',
-              padding: '0',
-              cursor: 'pointer'
-            }}
-          >
+          <Link className="nav-link" to="/dashboard">
+            Dashboard
+          </Link>
+        </li>
+        <li className="nav-item">
+          <a href="#!" onClick={this.onLogoutClick} className="nav-link">
             <img
               className="rounded-circle"
               src={user.avatar}
@@ -36,7 +32,7 @@ export class Navbar extends Component {
               style={{ width: '25px', marginRight: '5px' }}
             />
             Logout
-          </button>
+          </a>
         </li>
       </ul>
     );
