@@ -5,6 +5,7 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import InputGroup from '../common/InputGroup';
+import { createProfile } from '../../actions/profileActions';
 
 export class CreateProfile extends Component {
   state = {
@@ -25,9 +26,47 @@ export class CreateProfile extends Component {
     errors: {}
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onSubmit = e => {
     e.preventDefault();
-    console.log('submit');
+    const {
+      handle,
+      company,
+      website,
+      location,
+      status,
+      skills,
+      githubusername,
+      bio,
+      twitter,
+      facebook,
+      linkedin,
+      youtube,
+      instagram
+    } = this.state;
+
+    const profileData = {
+      handle,
+      company,
+      website,
+      location,
+      status,
+      skills,
+      githubusername,
+      bio,
+      twitter,
+      facebook,
+      linkedin,
+      youtube,
+      instagram
+    };
+
+    this.props.createProfile(profileData, this.props.history);
   };
 
   onChange = e => {
@@ -177,6 +216,7 @@ export class CreateProfile extends Component {
                 />
                 <div className="mb-3">
                   <button
+                    type="button"
                     onClick={() => {
                       this.setState(prevState => ({
                         displaySocialInputs: !prevState.displaySocialInputs
@@ -213,4 +253,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(
+  mapStateToProps,
+  { createProfile }
+)(CreateProfile);
