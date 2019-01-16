@@ -10,7 +10,7 @@ export class Experience extends Component {
   };
 
   render() {
-    const experiance = this.props.experience.map(exp => (
+    const experience = this.props.experience.map(exp => (
       <tr key={exp._id}>
         <td>{exp.company}</td>
         <td>{exp.title}</td>
@@ -44,7 +44,7 @@ export class Experience extends Component {
               <th />
             </tr>
           </thead>
-          <tbody>{experiance}</tbody>
+          <tbody>{experience}</tbody>
         </table>
       </div>
     );
