@@ -25,6 +25,8 @@ import Profile from './components/profile/Profile';
 
 import './App.css';
 
+require('dotenv').config();
+
 // Check for token
 if (localStorage.jwtToken) {
   // Set auth token header auth
