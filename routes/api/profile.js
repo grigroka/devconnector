@@ -3,6 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const request = require('request');
+const keys = require('../../config/keys');
 
 // Load Validation
 const validateProfileInput = require('../../validation/profile');
@@ -73,6 +75,28 @@ router.get('/handle/:handle', (req, res) => {
       res.json(profile);
     })
     .catch(err => res.status(404).json(err));
+});
+
+// @route   GET api/profile/github/:username
+// @desc    Get repos by Github username
+// @access  Public
+router.get('/github/:username', (req, res) => {
+  const options = {
+    url: `https://api.github.com/users/${
+      req.params.username
+    }/repos?per_page=5&sort=created: asc&client_id=${
+      keys.clientId
+    }&client_secret=${keys.clientSecret}`,
+    headers: {
+      'User-Agent': 'request'
+    }
+  };
+
+  request(options, (error, response, body) =>
+    !error && response.statusCode === 200
+      ? res.json(JSON.parse(body))
+      : res.status(response.statusCode).json(error)
+  );
 });
 
 // @route   GET api/profile/user/:user_id
