@@ -8,9 +8,13 @@ export class ProfileGithub extends Component {
   };
 
   async componentDidMount() {
-    const repos = await getGithub(this.props.username);
-    if (this.refs.myRef) {
-      this.setState({ repos });
+    try {
+      const repos = await getGithub(this.props.username);
+      if (this.refs.myRef) {
+        this.setState({ repos });
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
