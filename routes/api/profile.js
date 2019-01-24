@@ -255,6 +255,7 @@ router.delete(
   (req, res) => {
     const errors = {};
     Profile.findOne({ user: req.user.id })
+      .populate('user', ['name', 'avatar'])
       .then(profile => {
         // Get remove index
         const removeIndex = profile.experience
@@ -285,6 +286,7 @@ router.delete(
   (req, res) => {
     const errors = {};
     Profile.findOne({ user: req.user.id })
+      .populate('user', ['name', 'avatar'])
       .then(profile => {
         // Get remove index
         const removeIndex = profile.education
