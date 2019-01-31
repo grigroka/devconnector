@@ -11,6 +11,7 @@ import AddExperience from '../add-credencials/AddExperience';
 import AddEducation from '../add-credencials/AddEducation';
 import Profiles from '../profiles/Profiles';
 import Profile from '../profile/Profile';
+import Posts from '../posts/Posts';
 import NotFound from '../not-found/NotFound';
 
 export class NonLandingPages extends Component {
@@ -36,6 +37,7 @@ export class NonLandingPages extends Component {
             component={AddExperience}
           />
           <PrivateRoute exact path="/add-education" component={AddEducation} />
+          <PrivateRoute exact path="/feed" component={Posts} />
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
