@@ -1,6 +1,6 @@
 # DevConnector
 
-Add your keys to config/keys.js
+Add your keys to config/keys_dev.js
 
 ```
 module.exports = {
