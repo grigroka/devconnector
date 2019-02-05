@@ -12,7 +12,7 @@ export class Post extends Component {
   }
 
   render() {
-    const { post, loading } = this.props;
+    const { post, loading } = this.props.post;
     let postContent;
 
     if (post === null || loading || Object.keys(post).length === 0) {
@@ -20,7 +20,7 @@ export class Post extends Component {
     } else {
       postContent = (
         <div>
-          <PostItem post={post} />
+          <PostItem post={post} showActions={false} />
         </div>
       );
     }
